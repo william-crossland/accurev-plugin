@@ -418,12 +418,16 @@ public class AccurevSCM extends SCM {
                 chwscmd.add("-w");
                 chwscmd.add(this.workspace);
 
-                if (!localStream.equals(accurevWorkspace.getStream().getParent().getName())) {
-                    listener.getLogger().println("Parent stream needs to be updated.");
-                    needsRelocation = true;
-                    chwscmd.add("-b");
-                    chwscmd.add(localStream);
-                }
+				if (accurevWorkspace.getStream() != null)
+				{				
+					if (!localStream.equals(accurevWorkspace.getStream().getParent().getName())) 
+					{
+						listener.getLogger().println("Parent stream needs to be updated.");
+						needsRelocation = true;
+						chwscmd.add("-b");
+						chwscmd.add(localStream);
+					}
+				}
                 if (!accurevWorkspace.getHost().equals(remoteDetails.getHostName())) {
                     listener.getLogger().println("Host needs to be updated.");
                     needsRelocation = true;
